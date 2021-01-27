@@ -15,6 +15,8 @@ public class Raycaster : MonoBehaviour
 
     void Update()
     {
+        
+        
         if (cam != null && Input.GetButtonDown("Fire1"))
         {
 
@@ -26,10 +28,11 @@ public class Raycaster : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 DoorController door = hit.transform.GetComponentInParent<DoorController>();
-                if(door != null)
-                {
-                    door.PlayerInteract(transform.parent.position);
-                }
+                if(door != null) door.PlayerInteract(transform.parent.position);
+
+                ItemPickup pickup = hit.transform.GetComponent<ItemPickup>();
+                if (pickup != null) pickup.PlayerInteract();
+                
             }
         }
     }
